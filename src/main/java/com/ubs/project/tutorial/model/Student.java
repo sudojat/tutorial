@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -21,7 +21,29 @@ public class Student {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
-    // Other fields like address, contact information, etc.
+    @ManyToOne
+    @JoinColumn(name = "class_id")
+    private Class studentClass;
+
+    public Class getStudentClass() {
+        return studentClass;
+    }
+
+    public void setStudentClass(Class studentClass) {
+        this.studentClass = studentClass;
+    }
+
+// Other fields like address, contact information, etc.
+
+    public Student () {}
+
+    public Student(int id, String firstName, String lastName, LocalDate dateOfBirth, Class studentClass) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.studentClass = studentClass;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -31,11 +53,11 @@ public class Student {
         this.firstName = firstName;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -56,4 +78,6 @@ public class Student {
     }
 
     // Getters and setters
+
+
 }
